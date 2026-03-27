@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    name: Test with coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests with coverage
+        run: |
+          pytest \
+            --cov=. \
+            --cov-report=term-missing \
+            --cov-report=html \
+            --cov-report=xml \
+            --cov-fail-under=95 \
+            tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload HTML coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov/
+          retention-days: 7
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install ruff
+
+      - name: Run ruff
+        run: ruff check .
+
+  test-all-templates:
+    name: Test all templates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pytest typer jinja2
+
+      - name: Test all templates render
+        run: |
+          python -c "
+          from generator import generate, list_templates
+          from pathlib import Path
+          templates = list_templates(Path('templates'))
+          print('Templates:', templates)
+          assert len(templates) == 4, f'Expected 4 templates, got {len(templates)}'
+          for t in ['classic', 'modern', 'minimal', 'ats-friendly']:
+              assert t in templates, f'Template {t} not found'
+          print('All templates present')
+          "

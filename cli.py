@@ -10,7 +10,7 @@ Usage:
 import typer
 from pathlib import Path
 from typing import Optional
-from generator import generate, list_templates
+from generator import generate as generate_cv, list_templates
 
 app = typer.Typer(
     name="cv-generator",
@@ -55,7 +55,7 @@ def generate(
     typer.echo(f"Formats: {format_list}")
     typer.echo("")
 
-    results = generate(
+    results = generate_cv(
         profile_path=profile,
         template_name=template,
         templates_dir=TEMPLATES_DIR,

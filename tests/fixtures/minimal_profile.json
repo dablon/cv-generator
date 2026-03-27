@@ -1,0 +1,21 @@
+{
+  "title": "Test Developer",
+  "subtitle": "Python · Testing",
+  "email": "test@example.com",
+  "phone": "+1 555 000 0000",
+  "location": "Test City, Country",
+  "linkedin": "linkedin.com/in/test",
+  "profile": "Experienced test developer with a focus on clean code and comprehensive test coverage. Skilled in Python, testing frameworks, and CI/CD pipelines.",
+  "keywords": [
+    "Python",
+    "Pytest",
+    "Coverage",
+    "CI/CD",
+    "Docker",
+    "GitHub Actions",
+    "Testing",
+    "Quality Assurance",
+    "Automation",
+    "Clean Code"
+  ]
+}

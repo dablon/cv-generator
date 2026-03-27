@@ -1,0 +1,65 @@
+{
+  "title": "Senior Platform Engineer",
+  "subtitle": "Cloud · DevOps · Azure",
+  "email": "nicolasalca@hotmail.com",
+  "phone": "+57 300 123 4567",
+  "location": "Medellín, Colombia (Remote)",
+  "linkedin": "linkedin.com/in/nicolas-a-6193aa28",
+  "profile": "Cloud architect with 13+ years designing systems that handle real money and real users. Specializes in Azure cloud-native architecture, infrastructure-as-code, and the DevOps toolchain that makes continuous delivery possible.",
+  "keywords": [
+    "Cloud Architect",
+    "Platform Architect",
+    "Azure Architect",
+    "Solutions Architect",
+    "Infrastructure Architect",
+    "DevOps Architect",
+    "Cloud Infrastructure",
+    "Azure Solutions",
+    "Platform Engineering",
+    "IaC",
+    "Terraform",
+    "Kubernetes",
+    "Azure DevOps",
+    "CI/CD",
+    "Microservices",
+    "Docker",
+    "Python",
+    "C#",
+    ".NET",
+    "FinTech",
+    "SaaS"
+  ],
+  "experience": [
+    {
+      "title": "DevOps Manager",
+      "company": "Tafi",
+      "location": "Remote",
+      "start_date": "Oct 2022",
+      "end_date": "Present",
+      "description": "Leading DevOps transformation for a global platform. Architected CI/CD pipelines reducing deployment time from days to minutes."
+    },
+    {
+      "title": "Cloud Management Engineer",
+      "company": "TrafPay",
+      "location": "Remote",
+      "start_date": "May 2022",
+      "end_date": "Present",
+      "description": "Responsible for payment cloud infrastructure handling real financial transactions."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Engineer's degree, Computer Science",
+      "institution": "Universidad de Medellín",
+      "year": "2013 - 2015"
+    }
+  ],
+  "certifications": [
+    "Azure Solutions Architect Expert",
+    "AWS Solutions Architect Associate"
+  ],
+  "languages": [
+    {"name": "Spanish", "level": "Native"},
+    {"name": "English", "level": "Professional Working Proficiency"}
+  ]
+}
