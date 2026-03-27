@@ -1,0 +1,14 @@
+# Private profiles - share via secure channel only
+examples/*.json
+!examples/README.md
+
+# Generated CVs
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env

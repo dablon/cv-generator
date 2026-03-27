@@ -1,0 +1,185 @@
+/* ATS-Friendly CV Template
+   Designed for maximum ATS parseability.
+   Clean structure, no complex layouts, high keyword density.
+*/
+
+:root {
+    --text: #000000;
+    --text-light: #444444;
+    --border: #cccccc;
+    --bg: #ffffff;
+    --heading-bg: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.4;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cv-document {
+    width: 100%;
+}
+
+/* Header */
+.header-block {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--text);
+    margin-bottom: 15px;
+}
+
+.candidate-name {
+    font-size: 16pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.contact-block {
+    font-size: 9pt;
+    color: var(--text-light);
+}
+
+/* Sections */
+.section-block {
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+
+.section-heading {
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: var(--heading-bg);
+    padding: 6px 10px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 10px;
+}
+
+.section-content {
+    padding: 0 10px;
+    font-size: 10pt;
+}
+
+/* Profile */
+.profile-text {
+    text-align: justify;
+}
+
+/* Keywords - Grid layout for visibility */
+.keywords-content {
+    columns: 2;
+    column-gap: 20px;
+}
+
+.keyword-row {
+    display: inline;
+}
+
+.keyword {
+    display: inline;
+    font-size: 9pt;
+    background: var(--heading-bg);
+    padding: 2px 6px;
+    margin: 2px;
+    white-space: nowrap;
+}
+
+/* Experience */
+.job-entry {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted var(--border);
+}
+
+.job-entry:last-child {
+    border-bottom: none;
+}
+
+.job-header-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.job-title-plain {
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.job-dates {
+    font-size: 9pt;
+    color: var(--text-light);
+}
+
+.company-line {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.job-description {
+    font-size: 9.5pt;
+    line-height: 1.4;
+    margin-top: 4px;
+}
+
+/* Education */
+.education-entry {
+    font-size: 10pt;
+    margin-bottom: 6px;
+}
+
+.degree {
+    font-weight: bold;
+}
+
+.separator {
+    color: var(--text-light);
+    margin: 0 5px;
+}
+
+/* Certifications */
+.cert-item {
+    display: inline-block;
+    font-size: 9pt;
+    margin-right: 15px;
+}
+
+/* Technical Skills - Plain text for ATS */
+.section-content strong {
+    font-weight: bold;
+}
+
+/* Print optimization */
+@media print {
+    body {
+        padding: 0;
+        font-size: 9pt;
+    }
+    .section-heading {
+        background: none;
+    }
+    .keyword {
+        background: none;
+        border: 1px solid var(--border);
+    }
+}
+
+/* Ensure tables don't break */
+table {
+    page-break-inside: avoid;
+}

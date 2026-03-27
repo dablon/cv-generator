@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.title or "CV" }} - ATS Version</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    ===============================================
+    CANDIDATE: {{ profile.title or "N/A" }}
+    FORMAT: ATS-FRIENDLY VERSION
+    ===============================================
+    -->
+    <div class="cv-document">
+        <!-- HEADER BLOCK -->
+        <div class="header-block">
+            <h1 class="candidate-name">{{ profile.title }}</h1>
+            <div class="contact-block">
+                {% if profile.email %}{{ profile.email }}{% endif %}
+                {% if profile.phone %} | {{ profile.phone }}{% endif %}
+                {% if profile.location %} | {{ profile.location }}{% endif %}
+                {% if profile.linkedin %} | {{ profile.linkedin }}{% endif %}
+            </div>
+        </div>
+
+        <!-- PROFILE BLOCK -->
+        <div class="section-block">
+            <h2 class="section-heading">PROFESSIONAL SUMMARY</h2>
+            <div class="section-content">
+                {{ profile.profile }}
+            </div>
+        </div>
+
+        <!-- KEYWORDS BLOCK - MAXIMUM DENSITY FOR ATS -->
+        <div class="section-block">
+            <h2 class="section-heading">CORE COMPETENCIES</h2>
+            <div class="section-content keywords-content">
+                {% for row in keywords_parsed %}
+                <div class="keyword-row">
+                    {% for kw in row['items'] %}
+                    <span class="keyword">{{ kw }}</span>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- EXPERIENCE BLOCK -->
+        {% if profile.experience %}
+        <div class="section-block">
+            <h2 class="section-heading">PROFESSIONAL EXPERIENCE</h2>
+            <div class="section-content">
+                {% for job in profile.experience %}
+                <div class="job-entry">
+                    <div class="job-header-line">
+                        <span class="job-title-plain">{{ job.title }}</span>
+                        <span class="job-dates">{{ job.start_date }} - {{ job.end_date or 'Present' }}</span>
+                    </div>
+                    <div class="company-line">{{ job.company }}{% if job.location %} | {{ job.location }}{% endif %}</div>
+                    {% if job.description %}
+                    <div class="job-description">{{ job.description }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- EDUCATION BLOCK -->
+        {% if profile.education %}
+        <div class="section-block">
+            <h2 class="section-heading">EDUCATION</h2>
+            <div class="section-content">
+                {% for edu in profile.education %}
+                <div class="education-entry">
+                    <span class="degree">{{ edu.degree }}</span>
+                    <span class="separator">|</span>
+                    <span class="institution">{{ edu.institution }}</span>
+                    {% if edu.year %}
+                    <span class="separator">|</span>
+                    <span class="year">{{ edu.year }}</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- CERTIFICATIONS BLOCK -->
+        {% if profile.certifications %}
+        <div class="section-block">
+            <h2 class="section-heading">CERTIFICATIONS</h2>
+            <div class="section-content">
+                {% for cert in profile.certifications %}
+                <span class="cert-item">{{ cert }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- TECHNICAL SKILLS BLOCK - SEPARATE FOR ATS CLARITY -->
+        <div class="section-block">
+            <h2 class="section-heading">TECHNICAL SKILLS</h2>
+            <div class="section-content">
+                <strong>Technologies:</strong> {% for kw in profile.keywords %}{{ kw }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

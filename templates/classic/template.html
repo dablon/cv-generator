@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.title or "CV" }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Header -->
+        <header class="cv-header">
+            <h1 class="name">{{ profile.title }}</h1>
+            <p class="tagline">{{ profile.subtitle or profile.profile[:100] }}...</p>
+        </header>
+
+        <div class="cv-body">
+            <!-- Sidebar -->
+            <aside class="cv-sidebar">
+                <section class="sidebar-section">
+                    <h2>Contact</h2>
+                    <div class="contact-info">
+                        {% if profile.email %}
+                        <div class="contact-item">
+                            <span class="icon">📧</span>
+                            <span>{{ profile.email }}</span>
+                        </div>
+                        {% endif %}
+                        {% if profile.phone %}
+                        <div class="contact-item">
+                            <span class="icon">📱</span>
+                            <span>{{ profile.phone }}</span>
+                        </div>
+                        {% endif %}
+                        {% if profile.location %}
+                        <div class="contact-item">
+                            <span class="icon">📍</span>
+                            <span>{{ profile.location }}</span>
+                        </div>
+                        {% endif %}
+                        {% if profile.linkedin %}
+                        <div class="contact-item">
+                            <span class="icon">🔗</span>
+                            <span>{{ profile.linkedin }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2>Skills</h2>
+                    <ul class="skills-list">
+                        {% for row in keywords_parsed %}
+                        <li>
+                            {% for kw in row['items'] %}
+                            <span class="skill-tag">{{ kw }}</span>
+                            {% endfor %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                {% if profile.languages %}
+                <section class="sidebar-section">
+                    <h2>Languages</h2>
+                    <ul class="languages-list">
+                        {% for lang in profile.languages %}
+                        <li>{{ lang.name }} — {{ lang.level }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% endif %}
+            </aside>
+
+            <!-- Main Content -->
+            <main class="cv-main">
+                <section class="main-section">
+                    <h2 class="section-title">Professional Profile</h2>
+                    <p class="profile-text">{{ profile.profile }}</p>
+                </section>
+
+                {% if profile.experience %}
+                <section class="main-section">
+                    <h2 class="section-title">Experience</h2>
+                    {% for job in profile.experience %}
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <h3 class="job-title">{{ job.title }}</h3>
+                            <span class="job-date">{{ job.start_date }} — {{ job.end_date or 'Present' }}</span>
+                        </div>
+                        <p class="company">{{ job.company }}{% if job.location %} · {{ job.location }}{% endif %}</p>
+                        <p class="job-description">{{ job.description }}</p>
+                    </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
+
+                {% if profile.education %}
+                <section class="main-section">
+                    <h2 class="section-title">Education</h2>
+                    {% for edu in profile.education %}
+                    <div class="education-item">
+                        <h3 class="degree">{{ edu.degree }}</h3>
+                        <p class="institution">{{ edu.institution }}{% if edu.year %} · {{ edu.year }}{% endif %}</p>
+                    </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
+
+                {% if profile.certifications %}
+                <section class="main-section">
+                    <h2 class="section-title">Certifications</h2>
+                    <ul class="cert-list">
+                        {% for cert in profile.certifications %}
+                        <li>{{ cert }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+</body>
+</html>

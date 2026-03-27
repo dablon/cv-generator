@@ -1,0 +1,173 @@
+/* Minimal CV Template - Maximum whitespace, single page, content-first */
+
+:root {
+    --text: #111827;
+    --text-light: #6b7280;
+    --accent: #2563eb;
+    --border: #e5e7eb;
+    --bg: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px 40px;
+}
+
+.cv-container {
+    width: 100%;
+}
+
+/* Header */
+.cv-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.name {
+    font-size: 18pt;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.contact-line {
+    font-size: 9pt;
+    color: var(--text-light);
+}
+
+.contact-line span + span::before {
+    content: ' · ';
+}
+
+/* Sections */
+.section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.profile {
+    font-size: 10pt;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+/* Experience */
+.job-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.job-row:last-child {
+    border-bottom: none;
+}
+
+.job-main {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.job-title {
+    font-weight: 600;
+    font-size: 10pt;
+}
+
+.company {
+    color: var(--text-light);
+    font-size: 10pt;
+}
+
+.company::before {
+    content: 'at ';
+}
+
+.location {
+    color: var(--text-light);
+    font-size: 9pt;
+}
+
+.date {
+    font-size: 9pt;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+/* Skills */
+.skills-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    line-height: 1.8;
+}
+
+.skill {
+    font-size: 9pt;
+    color: var(--accent);
+}
+
+/* Education */
+.edu-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 0;
+}
+
+.degree {
+    font-weight: 600;
+    font-size: 10pt;
+}
+
+.institution {
+    color: var(--text-light);
+    font-size: 10pt;
+}
+
+.year {
+    font-size: 9pt;
+    color: var(--text-light);
+}
+
+.edu-row .institution::after {
+    content: '';
+}
+
+/* Certifications */
+.cert-list {
+    font-size: 9.5pt;
+    color: var(--text-light);
+}
+
+/* Print */
+@media print {
+    body {
+        padding: 0;
+        font-size: 9.5pt;
+    }
+}

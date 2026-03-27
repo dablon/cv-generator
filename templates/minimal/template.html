@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.title or "CV" }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Header - Minimal -->
+        <header class="cv-header">
+            <h1 class="name">{{ profile.title }}</h1>
+            <div class="contact-line">
+                {% if profile.email %}{{ profile.email }}{% endif %}
+                {% if profile.phone %} · {{ profile.phone }}{% endif %}
+                {% if profile.location %} · {{ profile.location }}{% endif %}
+                {% if profile.linkedin %} · {{ profile.linkedin }}{% endif %}
+            </div>
+        </header>
+
+        <!-- Profile -->
+        <section class="section">
+            <p class="profile">{{ profile.profile }}</p>
+        </section>
+
+        <!-- Experience - Condensed -->
+        {% if profile.experience %}
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            {% for job in profile.experience %}
+            <div class="job-row">
+                <div class="job-main">
+                    <span class="job-title">{{ job.title }}</span>
+                    <span class="company">{{ job.company }}</span>
+                    {% if job.location %}<span class="location">{{ job.location }}</span>{% endif %}
+                </div>
+                <span class="date">{{ job.start_date }} – {{ job.end_date or 'Present' }}</span>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        <!-- Skills - Single Line Tags -->
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <p class="skills-line">
+                {% for kw in profile.keywords %}<span class="skill">{{ kw }}</span>{% endfor %}
+            </p>
+        </section>
+
+        <!-- Education - Condensed -->
+        {% if profile.education %}
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            {% for edu in profile.education %}
+            <div class="edu-row">
+                <span class="degree">{{ edu.degree }}</span>
+                <span class="institution">{{ edu.institution }}</span>
+                {% if edu.year %}<span class="year">{{ edu.year }}</span>{% endif %}
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        <!-- Certifications - Simple List -->
+        {% if profile.certifications %}
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            <p class="cert-list">{{ profile.certifications | join(' · ') }}</p>
+        </section>
+        {% endif %}
+    </div>
+</body>
+</html>

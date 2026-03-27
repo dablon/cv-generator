@@ -1,0 +1,290 @@
+/* Modern CV Template - Clean, tech-forward design */
+
+:root {
+    --primary: #0f172a;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --text: #334155;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+}
+
+.cv-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Header */
+.cv-header {
+    background: var(--primary);
+    color: white;
+    padding: 35px 40px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.name {
+    font-size: 20pt;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 10pt;
+    color: var(--accent-light);
+    font-weight: 400;
+}
+
+.header-right {
+    text-align: right;
+    font-size: 9pt;
+}
+
+.contact-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.contact-row .label {
+    color: var(--accent-light);
+    font-weight: 500;
+}
+
+.contact-row span:last-child {
+    color: white;
+}
+
+/* Main */
+.cv-main {
+    padding: 30px 40px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.title-accent {
+    color: var(--accent);
+    font-weight: 400;
+}
+
+.profile-text {
+    font-size: 10pt;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+/* Timeline */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.job-title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.company-name {
+    font-size: 9.5pt;
+    color: var(--text-light);
+}
+
+.date-badge {
+    font-size: 8.5pt;
+    background: var(--bg-alt);
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.job-description {
+    font-size: 9.5pt;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-chip {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+    color: var(--text);
+    transition: all 0.2s;
+}
+
+.skill-chip:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Education Grid */
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.education-item {
+    background: var(--bg-alt);
+    padding: 15px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.degree {
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.institution {
+    font-size: 9pt;
+    color: var(--text-light);
+}
+
+.edu-year {
+    font-size: 8pt;
+    color: var(--accent);
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Certifications */
+.cert-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cert-item {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: white;
+    padding: 6px 14px;
+    font-size: 8.5pt;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Footer */
+.cv-footer {
+    background: var(--bg-alt);
+    padding: 15px 40px;
+    text-align: center;
+    font-size: 8pt;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+}
+
+/* Print */
+@media print {
+    body {
+        font-size: 10pt;
+    }
+    .cv-header {
+        padding: 25px 30px;
+    }
+    .cv-main {
+        padding: 20px 30px;
+    }
+    .skill-chip:hover {
+        background: var(--bg-alt);
+        color: var(--text);
+        border-color: var(--border);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column;
+    }
+    .header-right {
+        text-align: left;
+    }
+    .contact-row {
+        justify-content: flex-start;
+    }
+    .timeline-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
