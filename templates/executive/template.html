@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{ profile.title }}</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 11px; margin: 20px; background: #fff; }
+h1 { font-size: 20px; margin: 0 0 10px 0; color: #1a1a2e; }
+h2 { font-size: 14px; margin: 15px 0 8px 0; border-bottom: 2px solid #4f46e5; color: #1a1a2e; }
+p { margin: 0 0 8px 0; line-height: 1.4; }
+table { width: 100%; border-collapse: collapse; }
+td { vertical-align: top; padding: 8px; }
+.left { width: 65%; }
+.right { width: 35%; background: #f8fafc; border-left: 1px solid #e2e8f0; }
+.skill { display: inline-block; margin: 2px 4px 2px 0; font-size: 10px; background: #eef2ff; padding: 2px 6px; border-radius: 3px; color: #4f46e5; }
+.period { font-size: 10px; color: #4f46e5; font-weight: bold; }
+.jobtitle { font-weight: bold; }
+.company { color: #6b7280; }
+.header-bg { background: #0f172a; color: white; padding: 20px; }
+.footer { background: #0f172a; color: white; padding: 10px; text-align: center; font-size: 10px; }
+</style>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" class="header-bg">
+<h1>{{ profile.title }}</h1>
+<p>{{ profile.subtitle }}</p>
+<p>{{ profile.email }} | {{ profile.location }} | {{ profile.linkedin }}</p>
+</td>
+</tr>
+<tr>
+<td class="left">
+<h2>Profile</h2>
+<p>{{ profile.profile }}</p>
+
+<h2>Experience</h2>
+{% for job in profile.experience %}
+<p><span class="jobtitle">{{ job.title }}</span> <span class="period">{{ job.start_date }} - {{ job.end_date or 'Present' }}</span><br>
+<span class="company">{{ job.company }}{% if job.get('location') %}, {{ job.get("location") }}{% endif %}</span><br>
+{{ job.description }}</p>
+{% endfor %}
+
+<h2>Education</h2>
+{% for edu in profile.education %}
+<p><b>{{ edu.degree }}</b><br>
+{{ edu.institution }}{% if edu.get('year') %}, {{ edu.get("year") }}{% endif %}</p>
+{% endfor %}
+</td>
+<td class="right">
+<h2>Core Competencies</h2>
+{% for kw in profile.keywords %}<span class="skill">{{ kw }}</span>{% endfor %}
+
+<h2>Languages</h2>
+{% for lang in profile.languages %}
+<p><b>{{ lang.name }}</b>: {{ lang.level }}</p>
+{% endfor %}
+</td>
+</tr>
+<tr>
+<td colspan="2" class="footer">
+{{ profile.email }} | References available upon request
+</td>
+</tr>
+</table>
+</body>
+</html>

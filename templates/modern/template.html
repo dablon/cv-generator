@@ -3,126 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ profile.title or "CV" }}</title>
+    <title>{{ profile.title }}</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="cv-container">
+    <div class="cv-document">
         <!-- Header -->
         <header class="cv-header">
-            <div class="header-content">
+            <div class="header-inner">
                 <div class="header-left">
-                    <h1 class="name">{{ profile.title }}</h1>
-                    {% if profile.subtitle %}
-                    <p class="subtitle">{{ profile.subtitle }}</p>
-                    {% endif %}
+                    <div class="name-block">
+                        <p class="pre-title">Curriculum Vitae</p>
+                        <h1 class="candidate-name">{{ profile.title }}</h1>
+                        <p class="tagline">{{ profile.subtitle }}</p>
+                    </div>
                 </div>
                 <div class="header-right">
-                    {% if profile.email %}
-                    <div class="contact-row"><span class="label">Email</span><span>{{ profile.email }}</span></div>
-                    {% endif %}
-                    {% if profile.phone %}
-                    <div class="contact-row"><span class="label">Phone</span><span>{{ profile.phone }}</span></div>
-                    {% endif %}
-                    {% if profile.location %}
-                    <div class="contact-row"><span class="label">Location</span><span>{{ profile.location }}</span></div>
-                    {% endif %}
-                    {% if profile.linkedin %}
-                    <div class="contact-row"><span class="label">LinkedIn</span><span>{{ profile.linkedin }}</span></div>
-                    {% endif %}
+                    <div class="contact-card">
+                        <div class="contact-item">
+                            <span class="contact-icon">✉</span>
+                            <span>{{ profile.email }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>{{ profile.location }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🔗</span>
+                            <span>{{ profile.linkedin }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="header-accent"></div>
         </header>
 
-        <!-- Main -->
-        <main class="cv-main">
-            <!-- Profile Section -->
-            <section class="section profile-section">
-                <h2 class="section-title">
-                    <span class="title-accent">//</span> About
-                </h2>
-                <p class="profile-text">{{ profile.profile }}</p>
-            </section>
-
-            <!-- Experience -->
-            {% if profile.experience %}
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="title-accent">//</span> Experience
-                </h2>
-                <div class="timeline">
-                    {% for job in profile.experience %}
-                    <div class="timeline-item">
-                        <div class="timeline-header">
-                            <div class="timeline-left">
-                                <h3 class="job-title">{{ job.title }}</h3>
-                                <span class="company-name">{{ job.company }}{% if job.location %} · {{ job.location }}{% endif %}</span>
-                            </div>
-                            <div class="timeline-right">
-                                <span class="date-badge">{{ job.start_date }} — {{ job.end_date or 'Present' }}</span>
-                            </div>
-                        </div>
-                        <p class="job-description">{{ job.description }}</p>
+        <!-- Body -->
+        <div class="cv-body">
+            <!-- Main Content -->
+            <main class="cv-main">
+                <!-- Profile -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <span class="section-num">01</span>
+                        <h2 class="section-title">Professional Profile</h2>
                     </div>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
+                    <p class="profile-text">{{ profile.profile }}</p>
+                </section>
 
-            <!-- Skills Grid -->
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="title-accent">//</span> Skills
-                </h2>
-                <div class="skills-grid">
-                    {% for row in keywords_parsed %}
-                    <div class="skills-row">
-                        {% for kw in row['items'] %}
-                        <span class="skill-chip">{{ kw }}</span>
+                <!-- Experience -->
+                {% if profile.experience %}
+                <section class="content-section">
+                    <div class="section-header">
+                        <span class="section-num">02</span>
+                        <h2 class="section-title">Professional Experience</h2>
+                    </div>
+                    <div class="experience-list">
+                        {% for job in profile.experience %}
+                        <div class="experience-item">
+                            <div class="job-meta">
+                                <div class="job-period">{{ job.start_date }} — {{ job.end_date or 'Present' }}</div>
+                                <h3 class="job-title">{{ job.title }}</h3>
+                                <div class="job-company">{{ job.company }}{% if job.location %} · {{ job.location }}{% endif %}</div>
+                            </div>
+                            <div class="job-description">{{ job.description }}</div>
+                        </div>
                         {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
-            </section>
+                </section>
+                {% endif %}
 
-            <!-- Education -->
-            {% if profile.education %}
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="title-accent">//</span> Education
-                </h2>
-                <div class="education-grid">
-                    {% for edu in profile.education %}
-                    <div class="education-item">
-                        <h3 class="degree">{{ edu.degree }}</h3>
-                        <p class="institution">{{ edu.institution }}</p>
-                        {% if edu.year %}
-                        <span class="edu-year">{{ edu.year }}</span>
-                        {% endif %}
+                <!-- Education -->
+                {% if profile.education %}
+                <section class="content-section">
+                    <div class="section-header">
+                        <span class="section-num">03</span>
+                        <h2 class="section-title">Education</h2>
                     </div>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
+                    <div class="education-list">
+                        {% for edu in profile.education %}
+                        <div class="education-item">
+                            <div class="edu-period">{% if edu.year %}{{ edu.year }}{% endif %}</div>
+                            <div class="edu-details">
+                                <h4 class="degree">{{ edu.degree }}</h4>
+                                <p class="institution">{{ edu.institution }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
 
-            <!-- Certifications -->
-            {% if profile.certifications %}
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="title-accent">//</span> Certifications
-                </h2>
-                <div class="cert-grid">
-                    {% for cert in profile.certifications %}
-                    <div class="cert-item">{{ cert }}</div>
-                    {% endfor %}
+                <!-- Certifications -->
+                {% if profile.certifications %}
+                <section class="content-section">
+                    <div class="section-header">
+                        <span class="section-num">04</span>
+                        <h2 class="section-title">Certifications</h2>
+                    </div>
+                    <div class="cert-list">
+                        {% for cert in profile.certifications %}
+                        <span class="cert-badge">{{ cert }}</span>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="cv-sidebar">
+                <div class="sidebar-section skills-section">
+                    <h3 class="sidebar-title">Core Competencies</h3>
+                    <div class="skills-cloud">
+                        {% for kw in profile.keywords %}
+                        <span class="skill-tag">{{ kw }}</span>
+                        {% endfor %}
+                    </div>
                 </div>
-            </section>
-            {% endif %}
-        </main>
+
+                {% if profile.languages %}
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Languages</h3>
+                    <div class="languages-list">
+                        {% for lang in profile.languages %}
+                        <div class="lang-item">
+                            <span class="lang-name">{{ lang.name }}</span>
+                            <span class="lang-level">{{ lang.level }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </aside>
+        </div>
 
         <!-- Footer -->
         <footer class="cv-footer">
-            <p>Generated from profile data · Available upon request</p>
+            <p>References available upon request · {{ profile.email }}</p>
         </footer>
     </div>
 </body>

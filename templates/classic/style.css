@@ -1,13 +1,15 @@
-/* Classic CV Template - Traditional two-column layout */
+/* Classic Elegant CV Template */
 
 :root {
-    --primary: #1a365d;
-    --secondary: #2c5282;
-    --accent: #3182ce;
-    --bg-light: #f7fafc;
-    --text-main: #2d3748;
-    --text-light: #718096;
-    --border: #e2e8f0;
+    --primary: #1c1917;
+    --accent: #7c3aed;
+    --accent-dark: #5b21b6;
+    --bg: #ffffff;
+    --bg-warm: #fafaf9;
+    --text: #292524;
+    --text-light: #78716c;
+    --border: #e7e5e4;
+    --sidebar-bg: #fafaf9;
 }
 
 * {
@@ -17,210 +19,315 @@
 }
 
 body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 11pt;
-    line-height: 1.5;
-    color: var(--text-main);
-    background: white;
-    padding: 0;
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 10pt;
+    line-height: 1.6;
+    color: var(--text);
+    background: #f5f5f4;
 }
 
-.cv-container {
-    max-width: 850px;
-    margin: 0 auto;
-    background: white;
+.cv-document {
+    max-width: 800px;
+    margin: 30px auto;
+    background: var(--bg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
 /* Header */
 .cv-header {
     background: var(--primary);
     color: white;
-    padding: 30px 40px;
-    text-align: center;
+    padding: 45px 50px 35px;
+    position: relative;
 }
 
-.name {
-    font-size: 22pt;
-    font-weight: normal;
-    letter-spacing: 2px;
+.cv-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    right: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.candidate-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28pt;
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
     margin-bottom: 8px;
 }
 
-.tagline {
-    font-size: 10pt;
-    opacity: 0.9;
-    font-style: italic;
+.subtitle {
+    font-size: 10.5pt;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.contact-section {
+    text-align: right;
+}
+
+.contact-line {
+    margin-bottom: 5px;
+}
+
+.contact-item {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 8px;
 }
 
 /* Body Layout */
 .cv-body {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 1fr 240px;
     gap: 0;
 }
 
-/* Sidebar */
-.cv-sidebar {
-    background: var(--bg-light);
-    padding: 25px 20px;
+/* Left Column */
+.cv-left {
+    padding: 40px 40px 40px 50px;
     border-right: 1px solid var(--border);
 }
 
-.sidebar-section {
-    margin-bottom: 25px;
+.section {
+    margin-bottom: 35px;
 }
 
-.sidebar-section h2 {
-    font-size: 10pt;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--secondary);
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 5px;
-    margin-bottom: 12px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 8px;
-    font-size: 9pt;
-}
-
-.icon {
-    font-size: 10pt;
-}
-
-.skills-list {
-    list-style: none;
-}
-
-.skills-list li {
-    margin-bottom: 8px;
-}
-
-.skill-tag {
-    display: inline-block;
-    background: white;
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    font-size: 8pt;
-    margin: 2px;
-    border-radius: 3px;
-}
-
-.languages-list {
-    list-style: none;
-    font-size: 9pt;
-}
-
-.languages-list li {
-    padding: 3px 0;
-    border-bottom: 1px dotted var(--border);
-}
-
-/* Main Content */
-.cv-main {
-    padding: 25px 35px;
-}
-
-.main-section {
-    margin-bottom: 25px;
+.section:last-child {
+    margin-bottom: 0;
 }
 
 .section-title {
-    font-size: 12pt;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.title-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 13pt;
+    font-weight: 600;
     color: var(--primary);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 8px;
-    margin-bottom: 15px;
+    white-space: nowrap;
+}
+
+.title-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
 }
 
 .profile-text {
     font-size: 10pt;
+    line-height: 1.8;
+    color: var(--text);
     text-align: justify;
-    line-height: 1.6;
 }
 
+/* Experience */
 .experience-item {
-    margin-bottom: 18px;
-    padding-left: 10px;
-    border-left: 2px solid var(--accent);
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .job-header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 3px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 15px;
 }
 
 .job-title {
-    font-size: 11pt;
-    font-weight: bold;
+    font-size: 11.5pt;
+    font-weight: 600;
     color: var(--primary);
+    margin-bottom: 3px;
 }
 
-.job-date {
-    font-size: 9pt;
+.job-company {
+    font-size: 9.5pt;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.job-period {
+    font-size: 8.5pt;
     color: var(--text-light);
-    font-style: italic;
-}
-
-.company {
-    font-size: 10pt;
-    color: var(--secondary);
-    margin-bottom: 5px;
+    text-align: right;
+    line-height: 1.4;
+    white-space: nowrap;
 }
 
 .job-description {
     font-size: 9.5pt;
-    line-height: 1.5;
+    line-height: 1.65;
+    color: var(--text);
 }
 
+/* Education */
 .education-item {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.education-item:last-child {
+    margin-bottom: 0;
+}
+
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 15px;
+    margin-bottom: 3px;
 }
 
 .degree {
-    font-size: 11pt;
-    font-weight: bold;
+    font-size: 10.5pt;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.edu-year {
+    font-size: 9pt;
+    color: var(--text-light);
+    white-space: nowrap;
 }
 
 .institution {
-    font-size: 10pt;
+    font-size: 9.5pt;
     color: var(--text-light);
 }
 
-.cert-list {
-    list-style: none;
-    columns: 2;
+/* Certifications */
+.cert-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.cert-list li {
+.cert-item {
+    font-size: 9pt;
+    color: var(--accent-dark);
+    padding: 4px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+/* Right Column */
+.cv-right {
+    background: var(--sidebar-bg);
+    padding: 40px 30px;
+}
+
+.sidebar-block {
+    margin-bottom: 30px;
+}
+
+.sidebar-block:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-title {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-item {
+    font-size: 8.5pt;
+    color: var(--text);
+    background: white;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+
+.languages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.lang-name {
     font-size: 9.5pt;
-    padding: 3px 0;
-    break-inside: avoid;
+    font-weight: 500;
 }
 
-.cert-list li::before {
-    content: "✓ ";
-    color: var(--accent);
+.lang-level {
+    font-size: 8.5pt;
+    color: var(--text-light);
+}
+
+/* Footer */
+.cv-footer {
+    background: var(--primary);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 15px 50px;
+    text-align: center;
+    font-size: 8.5pt;
 }
 
 /* Print */
 @media print {
     body {
-        font-size: 10pt;
+        background: white;
     }
-    .cv-header {
-        padding: 20px;
+    .cv-document {
+        margin: 0;
+        box-shadow: none;
     }
-    .cv-sidebar {
-        padding: 15px;
+    .cv-left {
+        padding: 30px 30px 30px 40px;
     }
-    .cv-main {
-        padding: 15px 25px;
+    .cv-right {
+        padding: 30px 25px;
     }
 }

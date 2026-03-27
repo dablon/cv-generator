@@ -1,15 +1,16 @@
-/* Modern CV Template - Clean, tech-forward design */
+/* Modern Professional CV Template - Premium Design */
 
 :root {
-    --primary: #0f172a;
-    --accent: #6366f1;
+    --primary: #1a1a2e;
+    --accent: #4f46e5;
     --accent-light: #818cf8;
+    --accent-bg: #eef2ff;
     --bg: #ffffff;
     --bg-alt: #f8fafc;
-    --text: #334155;
+    --text: #1e293b;
     --text-light: #64748b;
     --border: #e2e8f0;
-    --radius: 8px;
+    --sidebar-bg: #f1f5f9;
 }
 
 * {
@@ -19,223 +20,259 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 10.5pt;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 10pt;
     line-height: 1.6;
     color: var(--text);
     background: var(--bg);
 }
 
-.cv-container {
-    max-width: 800px;
+.cv-document {
+    max-width: 850px;
     margin: 0 auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
 /* Header */
 .cv-header {
     background: var(--primary);
     color: white;
-    padding: 35px 40px;
+    padding: 40px 45px;
+    position: relative;
+    overflow: hidden;
 }
 
-.header-content {
+.cv-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent) 0%, transparent 100%);
+    opacity: 0.15;
+}
+
+.cv-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+
+.header-inner {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
 }
 
-.name {
-    font-size: 20pt;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 5px;
-}
-
-.subtitle {
-    font-size: 10pt;
-    color: var(--accent-light);
-    font-weight: 400;
-}
-
-.header-right {
-    text-align: right;
+.pre-title {
     font-size: 9pt;
-}
-
-.contact-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-bottom: 4px;
-}
-
-.contact-row .label {
+    text-transform: uppercase;
+    letter-spacing: 3px;
     color: var(--accent-light);
+    margin-bottom: 8px;
     font-weight: 500;
 }
 
-.contact-row span:last-child {
+.candidate-name {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 26pt;
+    font-weight: 600;
     color: white;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
 }
 
-/* Main */
+.tagline {
+    font-size: 10.5pt;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 18px 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 220px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-icon {
+    font-size: 10pt;
+    width: 20px;
+    text-align: center;
+}
+
+/* Body Layout */
+.cv-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 0;
+}
+
+/* Main Content */
 .cv-main {
-    padding: 30px 40px;
+    padding: 35px 40px;
+    border-right: 1px solid var(--border);
 }
 
-.section {
-    margin-bottom: 30px;
+.content-section {
+    margin-bottom: 35px;
+}
+
+.content-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+}
+
+.section-num {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.3;
+    font-family: 'Source Serif 4', serif;
 }
 
 .section-title {
-    font-size: 11pt;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14pt;
     font-weight: 600;
     color: var(--primary);
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.title-accent {
-    color: var(--accent);
-    font-weight: 400;
+    letter-spacing: -0.3px;
 }
 
 .profile-text {
     font-size: 10pt;
-    line-height: 1.7;
+    line-height: 1.8;
     color: var(--text);
+    text-align: justify;
 }
 
-/* Timeline */
-.timeline {
+/* Experience */
+.experience-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
 }
 
-.timeline-item {
-    padding-left: 20px;
-    border-left: 2px solid var(--border);
+.experience-item {
     position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent);
 }
 
-.timeline-item::before {
+.experience-item::before {
     content: '';
     position: absolute;
     left: -5px;
-    top: 5px;
+    top: 4px;
     width: 8px;
     height: 8px;
     background: var(--accent);
     border-radius: 50%;
 }
 
-.timeline-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 6px;
+.job-meta {
+    margin-bottom: 8px;
+}
+
+.job-period {
+    font-size: 8.5pt;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 
 .job-title {
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 600;
     color: var(--primary);
+    margin-bottom: 3px;
 }
 
-.company-name {
+.job-company {
     font-size: 9.5pt;
     color: var(--text-light);
-}
-
-.date-badge {
-    font-size: 8.5pt;
-    background: var(--bg-alt);
-    padding: 3px 10px;
-    border-radius: 20px;
-    color: var(--text-light);
-    white-space: nowrap;
 }
 
 .job-description {
     font-size: 9.5pt;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--text);
 }
 
-/* Skills Grid */
-.skills-grid {
+/* Education */
+.education-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-
-.skills-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.skill-chip {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    padding: 4px 12px;
-    font-size: 8.5pt;
-    border-radius: 4px;
-    color: var(--text);
-    transition: all 0.2s;
-}
-
-.skill-chip:hover {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-}
-
-/* Education Grid */
-.education-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
 }
 
 .education-item {
-    background: var(--bg-alt);
-    padding: 15px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.edu-period {
+    font-size: 9pt;
+    color: var(--text-light);
+    min-width: 100px;
+    padding-top: 2px;
 }
 
 .degree {
-    font-size: 10pt;
+    font-size: 10.5pt;
     font-weight: 600;
     color: var(--primary);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .institution {
-    font-size: 9pt;
+    font-size: 9.5pt;
     color: var(--text-light);
 }
 
-.edu-year {
-    font-size: 8pt;
-    color: var(--accent);
-    display: inline-block;
-    margin-top: 5px;
-}
-
 /* Certifications */
-.cert-grid {
+.cert-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.cert-item {
+.cert-badge {
     background: linear-gradient(135deg, var(--accent), var(--accent-light));
     color: white;
     padding: 6px 14px;
@@ -244,47 +281,115 @@ body {
     font-weight: 500;
 }
 
+/* Sidebar */
+.cv-sidebar {
+    background: var(--sidebar-bg);
+    padding: 35px 25px;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-title {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.skills-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.skills-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-tag {
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 4px 10px;
+    font-size: 8pt;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid rgba(79, 70, 229, 0.15);
+}
+
+.languages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.lang-name {
+    font-weight: 500;
+    font-size: 9.5pt;
+}
+
+.lang-level {
+    font-size: 8.5pt;
+    color: var(--text-light);
+}
+
 /* Footer */
 .cv-footer {
-    background: var(--bg-alt);
-    padding: 15px 40px;
+    background: var(--primary);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 15px 45px;
     text-align: center;
-    font-size: 8pt;
-    color: var(--text-light);
-    border-top: 1px solid var(--border);
+    font-size: 8.5pt;
 }
 
 /* Print */
 @media print {
     body {
-        font-size: 10pt;
+        font-size: 9pt;
+    }
+    .cv-document {
+        box-shadow: none;
     }
     .cv-header {
         padding: 25px 30px;
     }
     .cv-main {
-        padding: 20px 30px;
+        padding: 25px 30px;
     }
-    .skill-chip:hover {
-        background: var(--bg-alt);
-        color: var(--text);
-        border-color: var(--border);
+    .cv-sidebar {
+        padding: 25px 20px;
     }
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-    .header-content {
+@media (max-width: 700px) {
+    .header-inner {
         flex-direction: column;
     }
-    .header-right {
-        text-align: left;
+    .cv-body {
+        grid-template-columns: 1fr;
     }
-    .contact-row {
-        justify-content: flex-start;
-    }
-    .timeline-header {
-        flex-direction: column;
-        gap: 5px;
+    .cv-sidebar {
+        border-top: 1px solid var(--border);
     }
 }

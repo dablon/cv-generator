@@ -33,7 +33,7 @@ def generate(
     """Generate CV from JSON profile."""
 
     format_list = [f.strip() for f in formats.split(',')]
-    valid_formats = {'html', 'csv', 'md'}
+    valid_formats = {'html', 'csv', 'md', 'pdf'}
     invalid = set(format_list) - valid_formats
     if invalid:
         typer.echo(f"Invalid formats: {invalid}. Valid: {valid_formats}", err=True)
