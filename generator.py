@@ -78,6 +78,26 @@ def render_pdf(profile: dict, template_name: str, templates_dir: Path, output_pa
     else:
         html_content = style_block + html_content
 
+    # Inline photo as base64 if present so Chromium embeds it without filesystem access.
+    # After render_html() the Jinja2 variable {{ profile.photo }} is already expanded to the actual path.
+    photo_path = profile.get("photo")
+    if photo_path:
+        photo_file = Path(photo_path)
+        if photo_file.exists():
+            import base64
+            ext = photo_file.suffix.lower()
+            mime = (
+                "image/png" if ext == ".png"
+                else "image/jpeg" if ext in (".jpg", ".jpeg")
+                else "image/gif" if ext == ".gif"
+                else "image/png"
+            )
+            b64 = base64.b64encode(photo_file.read_bytes()).decode("ascii")
+            data_uri = f"data:{mime};base64,{b64}"
+            # Replace the already-resolved path in the rendered HTML
+            html_content = html_content.replace(f'src="{photo_path}"', f'src="{data_uri}"')
+            html_content = html_content.replace(f"src='{photo_path}'", f'src="{data_uri}"')
+
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
@@ -156,6 +176,38 @@ def generate(
             results['pdf'] = output_file
 
     return results
+
+
+def generate_all(
+    profile_path: str | Path,
+    templates_dir: Path | None = None,
+    output_dir: Path | None = None,
+    formats: list[str] | None = None,
+) -> dict[str, dict[str, Path]]:
+    """Generate CVs for **all** templates at once.
+
+    Returns a nested dict: {template_name: {format: output_path}}.
+    """
+    if templates_dir is None:
+        templates_dir = Path(__file__).parent / 'templates'
+    if output_dir is None:
+        output_dir = Path(__file__).parent / 'output'
+    if formats is None:
+        formats = ['html', 'csv', 'md']
+
+    templates = list_templates(templates_dir)
+    all_results = {}
+
+    for tmpl in templates:
+        all_results[tmpl] = generate(
+            profile_path=profile_path,
+            template_name=tmpl,
+            templates_dir=templates_dir,
+            output_dir=output_dir,
+            formats=formats,
+        )
+
+    return all_results
 
 
 def list_templates(templates_dir: Path | None = None) -> list[str]:

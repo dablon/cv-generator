@@ -32,6 +32,17 @@ body {
     width: 100%;
 }
 
+/* Photo */
+.header-block .photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    display: block;
+    border: 2px solid var(--border);
+}
+
 /* Header */
 .header-block {
     text-align: center;

@@ -1,0 +1,46 @@
+/* Two-Column CV Template */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 9.5pt; line-height: 1.55; color: #1e293b; background: #fff; }
+.cv-doc { max-width: 850px; margin: 0 auto; }
+.header { background: #0f172a; color: #fff; padding: 30px 35px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.header .photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.3); display: block; margin-bottom: 8px; }
+.top-label { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 2px; color: #7dd3fc; margin-bottom: 6px; }
+.header-name h1 { font-size: 22pt; font-weight: 700; margin-bottom: 4px; color: #fff; }
+.subtitle { font-size: 10pt; color: #94a3b8; }
+.header-contact { text-align: right; }
+.contact-row { font-size: 8.5pt; color: #cbd5e1; margin-bottom: 5px; }
+.dot { color: #38bdf8; margin-right: 6px; font-size: 6pt; vertical-align: middle; }
+.body-wrap { display: grid; grid-template-columns: 260px 1fr; gap: 0; }
+.sidebar { background: #f8fafc; padding: 25px 22px; border-right: 1px solid #e2e8f0; }
+.side-block { margin-bottom: 22px; }
+.side-title { font-size: 8pt; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin-bottom: 10px; font-weight: 600; }
+.skills { display: flex; flex-wrap: wrap; gap: 5px; }
+.skill-pill { background: #e0e7ff; color: #4338ca; padding: 3px 8px; border-radius: 3px; font-size: 7.5pt; font-weight: 500; }
+.lang-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 8.5pt; }
+.lang-name { font-weight: 600; color: #1e293b; }
+.lang-level { color: #64748b; }
+.certs { display: flex; flex-direction: column; gap: 4px; }
+.cert-item { font-size: 8pt; color: #4f46e5; font-weight: 500; }
+.main-content { padding: 25px 30px; }
+.sec { margin-bottom: 22px; }
+.sec-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #e2e8f0; }
+.sec-num { font-size: 11pt; font-weight: 700; color: #c7d2fe; }
+.sec-head h2 { font-size: 12pt; font-weight: 700; color: #0f172a; }
+.profile-text { font-size: 9.5pt; line-height: 1.7; color: #334155; text-align: justify; }
+.job { margin-bottom: 14px; }
+.job-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+.job-title { font-weight: 700; font-size: 10pt; color: #0f172a; }
+.job-period { font-size: 8pt; color: #4f46e5; font-weight: 600; }
+.job-company { font-size: 8.5pt; color: #64748b; margin-bottom: 5px; }
+.job-desc { font-size: 9pt; color: #334155; line-height: 1.5; }
+.edu { margin-bottom: 10px; }
+.edu-header { display: flex; justify-content: space-between; align-items: baseline; }
+.edu-degree { font-weight: 700; font-size: 9.5pt; color: #0f172a; }
+.edu-year { font-size: 8pt; color: #64748b; }
+.edu-inst { font-size: 8.5pt; color: #64748b; }
+.footer { background: #f1f5f9; padding: 12px 35px; text-align: center; font-size: 8pt; color: #64748b; border-top: 1px solid #e2e8f0; }
+@media print {
+    body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .cv-doc { max-width: none; }
+    .job, .edu { page-break-inside: avoid; break-inside: avoid; }
+}

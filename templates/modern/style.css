@@ -71,6 +71,25 @@ body {
     z-index: 1;
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.photo-wrapper {
+    flex-shrink: 0;
+}
+
+.photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .pre-title {
     font-size: 9pt;
     text-transform: uppercase;

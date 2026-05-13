@@ -16,6 +16,9 @@
     <div class="cv-document">
         <!-- HEADER BLOCK -->
         <div class="header-block">
+            {% if profile.photo %}
+            <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+            {% endif %}
             <h1 class="candidate-name">{{ profile.title }}</h1>
             <div class="contact-block">
                 {% if profile.email %}{{ profile.email }}{% endif %}

@@ -16,16 +16,20 @@ td { vertical-align: top; padding: 8px; }
 .period { font-size: 10px; color: #4f46e5; font-weight: bold; }
 .jobtitle { font-weight: bold; }
 .company { color: #6b7280; }
-.header-bg { background: #0f172a; color: white; padding: 20px; }
-.footer { background: #0f172a; color: white; padding: 10px; text-align: center; font-size: 10px; }
+        .header-bg { background: #0f172a; color: white; padding: 20px; }
+        .photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.3); margin-bottom: 8px; display: block; }
+        .footer { background: #0f172a; color: white; padding: 10px; text-align: center; font-size: 10px; }
 </style>
 </head>
 <body>
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
-<td colspan="2" class="header-bg">
-<h1>{{ profile.title }}</h1>
-<p>{{ profile.subtitle }}</p>
+        <td colspan="2" class="header-bg">
+            {% if profile.photo %}
+            <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+            {% endif %}
+            <h1>{{ profile.title }}</h1>
+            <p>{{ profile.subtitle }}</p>
 <p>{{ profile.email }} | {{ profile.location }} | {{ profile.linkedin }}</p>
 </td>
 </tr>

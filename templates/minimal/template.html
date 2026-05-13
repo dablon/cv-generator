@@ -10,6 +10,9 @@
     <div class="cv-container">
         <!-- Header - Minimal -->
         <header class="cv-header">
+            {% if profile.photo %}
+            <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+            {% endif %}
             <h1 class="name">{{ profile.title }}</h1>
             <div class="contact-line">
                 {% if profile.email %}{{ profile.email }}{% endif %}

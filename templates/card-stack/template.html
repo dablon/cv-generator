@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.title }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cv-doc">
+        <header class="header">
+            <div class="header-top">
+                {% if profile.photo %}
+                <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+                {% endif %}
+                <h1>{{ profile.title }}</h1>
+                <p class="tagline">{{ profile.subtitle }}</p>
+            </div>
+            <div class="header-contact">
+                {% if profile.email %}<span>{{ profile.email }}</span>{% endif %}
+                {% if profile.location %}<span>{{ profile.location }}</span>{% endif %}
+                {% if profile.linkedin %}<span>{{ profile.linkedin }}</span>{% endif %}
+            </div>
+        </header>
+        <main class="content">
+            {% if profile.profile %}
+            <section class="card">
+                <h2>Professional Profile</h2>
+                <p>{{ profile.profile }}</p>
+            </section>
+            {% endif %}
+            {% if profile.experience %}
+            <section class="card">
+                <h2>Professional Experience</h2>
+                {% for job in profile.experience %}
+                <div class="card-row">
+                    <div class="card-meta">
+                        <div class="card-dates">{{ job.start_date }} &mdash; {{ job.end_date or 'Present' }}</div>
+                        <div class="card-title">{{ job.title }}</div>
+                        <div class="card-company">{{ job.company }}{% if job.location %} &middot; {{ job.location }}{% endif %}</div>
+                    </div>
+                    <div class="card-desc">{{ job.description }}</div>
+                </div>
+                {% endfor %}
+            </section>
+            {% endif %}
+            {% if profile.education %}
+            <section class="card">
+                <h2>Education</h2>
+                {% for edu in profile.education %}
+                <div class="card-row">
+                    <div class="card-meta">
+                        <div class="card-dates">{{ edu.year }}</div>
+                        <div class="card-title">{{ edu.degree }}</div>
+                        <div class="card-company">{{ edu.institution }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+            {% endif %}
+            <section class="card">
+                <h2>Skills & Competencies</h2>
+                <div class="skills-grid">
+                    {% for kw in profile.keywords %}
+                    <span class="skill-tag">{{ kw }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+            {% if profile.languages %}
+            <section class="card">
+                <h2>Languages</h2>
+                <div class="lang-grid">
+                    {% for lang in profile.languages %}
+                    <div class="lang-card">
+                        <span class="lang-title">{{ lang.name }}</span>
+                        <span class="lang-val">{{ lang.level }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+            {% if profile.certifications %}
+            <section class="card">
+                <h2>Certifications</h2>
+                <div class="cert-grid">
+                    {% for cert in profile.certifications %}
+                    <span class="cert-tag">{{ cert }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+        </main>
+        <footer class="footer">
+            {{ profile.email }} &middot; References available upon request
+        </footer>
+    </div>
+</body>
+</html>

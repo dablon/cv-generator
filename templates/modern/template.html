@@ -13,6 +13,11 @@
         <header class="cv-header">
             <div class="header-inner">
                 <div class="header-left">
+                    {% if profile.photo %}
+                    <div class="photo-wrapper">
+                        <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+                    </div>
+                    {% endif %}
                     <div class="name-block">
                         <p class="pre-title">Curriculum Vitae</p>
                         <h1 class="candidate-name">{{ profile.title }}</h1>

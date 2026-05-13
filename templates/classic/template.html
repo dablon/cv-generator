@@ -13,6 +13,9 @@
         <header class="cv-header">
             <div class="header-content">
                 <div class="name-section">
+                    {% if profile.photo %}
+                    <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+                    {% endif %}
                     <h1 class="candidate-name">{{ profile.title }}</h1>
                     <p class="subtitle">{{ profile.subtitle }}</p>
                 </div>

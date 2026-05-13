@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.title }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cv-doc">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-name">
+                {% if profile.photo %}
+                <img src="{{ profile.photo }}" alt="{{ profile.name }}" class="photo">
+                {% endif %}
+                <p class="top-label">Curriculum Vitae</p>
+                <h1>{{ profile.title }}</h1>
+                <p class="subtitle">{{ profile.subtitle }}</p>
+            </div>
+            <div class="header-contact">
+                {% if profile.email %}
+                <div class="contact-row">
+                    <span class="dot">&#9632;</span>
+                    <span>{{ profile.email }}</span>
+                </div>
+                {% endif %}
+                {% if profile.location %}
+                <div class="contact-row">
+                    <span class="dot">&#9632;</span>
+                    <span>{{ profile.location }}</span>
+                </div>
+                {% endif %}
+                {% if profile.linkedin %}
+                <div class="contact-row">
+                    <span class="dot">&#9632;</span>
+                    <span>{{ profile.linkedin }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Body: Two column -->
+        <div class="body-wrap">
+            <!-- Left Sidebar -->
+            <aside class="sidebar">
+                <div class="side-block">
+                    <h3 class="side-title">Core Competencies</h3>
+                    <div class="skills">
+                        {% for kw in profile.keywords %}
+                        <span class="skill-pill">{{ kw }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% if profile.languages %}
+                <div class="side-block">
+                    <h3 class="side-title">Languages</h3>
+                    {% for lang in profile.languages %}
+                    <div class="lang-row">
+                        <span class="lang-name">{{ lang.name }}</span>
+                        <span class="lang-level">{{ lang.level }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if profile.certifications %}
+                <div class="side-block">
+                    <h3 class="side-title">Certifications</h3>
+                    <div class="certs">
+                        {% for cert in profile.certifications %}
+                        <span class="cert-item">{{ cert }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </aside>
+
+            <!-- Right Main -->
+            <main class="main-content">
+                <!-- Profile -->
+                <section class="sec">
+                    <div class="sec-head">
+                        <span class="sec-num">01</span>
+                        <h2>Professional Profile</h2>
+                    </div>
+                    <p class="profile-text">{{ profile.profile }}</p>
+                </section>
+
+                <!-- Experience -->
+                {% if profile.experience %}
+                <section class="sec">
+                    <div class="sec-head">
+                        <span class="sec-num">02</span>
+                        <h2>Professional Experience</h2>
+                    </div>
+                    {% for job in profile.experience %}
+                    <div class="job">
+                        <div class="job-header">
+                            <div class="job-title">{{ job.title }}</div>
+                            <div class="job-period">{{ job.start_date }} &mdash; {{ job.end_date or 'Present' }}</div>
+                        </div>
+                        <div class="job-company">{{ job.company }}{% if job.location %} &middot; {{ job.location }}{% endif %}</div>
+                        <div class="job-desc">{{ job.description }}</div>
+                    </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
+
+                <!-- Education -->
+                {% if profile.education %}
+                <section class="sec">
+                    <div class="sec-head">
+                        <span class="sec-num">03</span>
+                        <h2>Education</h2>
+                    </div>
+                    {% for edu in profile.education %}
+                    <div class="edu">
+                        <div class="edu-header">
+                            <div class="edu-degree">{{ edu.degree }}</div>
+                            <div class="edu-year">{{ edu.year }}</div>
+                        </div>
+                        <div class="edu-inst">{{ edu.institution }}</div>
+                    </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            {{ profile.email }} &middot; References available upon request
+        </footer>
+    </div>
+</body>
+</html>
