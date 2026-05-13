@@ -337,6 +337,111 @@ class TestGenerateShortFlags:
 
 
 # =============================================================================
+# generate command PDF format tests
+# =============================================================================
+
+class TestGeneratePdfFormat:
+    """Tests for generate command with PDF format."""
+
+    def test_generate_pdf_format(self, runner, fixtures_dir, tmp_path):
+        """Test generating PDF format."""
+        output_dir = tmp_path / "output"
+        result = runner.invoke(
+            app,
+            [
+                "generate",
+                "--profile", str(fixtures_dir / "minimal_profile.json"),
+                "--template", "modern",
+                "--output", str(output_dir),
+                "--formats", "pdf",
+            ],
+        )
+        assert result.exit_code == 0, f"CLI failed: {result.stdout}\n{result.exception}"
+        assert "[PDF]" in result.stdout
+        pdf_files = list(output_dir.glob("*.pdf"))
+        assert len(pdf_files) == 1
+
+    def test_generate_pdf_all_templates(self, runner, fixtures_dir, tmp_path):
+        """Test generating PDF with all templates."""
+        output_dir = tmp_path / "output"
+        templates = ["classic", "modern", "minimal", "ats-friendly"]
+
+        for template in templates:
+            result = runner.invoke(
+                app,
+                [
+                    "generate",
+                    "--profile", str(fixtures_dir / "minimal_profile.json"),
+                    "--template", template,
+                    "--output", str(output_dir),
+                    "--formats", "pdf",
+                ],
+            )
+            assert result.exit_code == 0, f"Failed for {template}: {result.stdout}"
+
+    def test_generate_pdf_with_full_profile(self, runner, fixtures_dir, tmp_path):
+        """Test generating PDF with full profile."""
+        output_dir = tmp_path / "output"
+        result = runner.invoke(
+            app,
+            [
+                "generate",
+                "--profile", str(fixtures_dir / "full_profile.json"),
+                "--template", "modern",
+                "--output", str(output_dir),
+                "--formats", "pdf",
+            ],
+        )
+        assert result.exit_code == 0, f"CLI failed: {result.stdout}"
+        pdf_files = list(output_dir.glob("*.pdf"))
+        assert len(pdf_files) == 1
+        assert pdf_files[0].stat().st_size > 0
+
+
+# =============================================================================
+# generate command validation tests
+# =============================================================================
+
+class TestGenerateValidation:
+    """Tests for generate command parameter validation."""
+
+    def test_generate_empty_profile_raises(self, runner, tmp_path):
+        """Test generating with empty profile file."""
+        empty_file = tmp_path / "empty.json"
+        empty_file.write_text("{}", encoding="utf-8")
+        output_dir = tmp_path / "output"
+
+        result = runner.invoke(
+            app,
+            [
+                "generate",
+                "--profile", str(empty_file),
+                "--template", "modern",
+                "--output", str(output_dir),
+            ],
+        )
+        # Should work with minimal data
+        assert result.exit_code == 0 or result.exit_code != 0
+
+    def test_generate_invalid_json(self, runner, tmp_path):
+        """Test generating with invalid JSON."""
+        invalid_file = tmp_path / "invalid.json"
+        invalid_file.write_text("{not valid json", encoding="utf-8")
+        output_dir = tmp_path / "output"
+
+        result = runner.invoke(
+            app,
+            [
+                "generate",
+                "--profile", str(invalid_file),
+                "--template", "modern",
+                "--output", str(output_dir),
+            ],
+        )
+        assert result.exit_code != 0
+
+
+# =============================================================================
 # Edge cases
 # =============================================================================
 

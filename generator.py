@@ -31,9 +31,66 @@ def render_html(profile: dict, template_name: str, templates_dir: Path) -> str:
 
 
 def render_pdf(profile: dict, template_name: str, templates_dir: Path, output_path: Path) -> None:
-    from weasyprint import HTML
+    """Render CV profile to PDF using Playwright headless browser.
+
+    Renders the HTML template via Chromium and prints to PDF with proper
+    A4 pagination, margins, and background graphics.
+    """
+    from playwright.sync_api import sync_playwright
+
     html_content = render_html(profile, template_name, templates_dir)
-    HTML(string=html_content, base_url=str(templates_dir)).write_pdf(str(output_path))
+
+    # Inline the template stylesheet so Chromium has all styles regardless of file paths
+    css_path = templates_dir / template_name / "style.css"
+    inline_styles = []
+    if css_path.exists():
+        inline_styles.append(css_path.read_text(encoding="utf-8"))
+
+    # Add print-specific rules for proper A4 sizing and backgrounds
+    inline_styles.append("""
+    @page { size: A4; margin: 15mm; }
+    body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .experience-item { page-break-inside: avoid; break-inside: avoid; }
+    .education-item { page-break-inside: avoid; break-inside: avoid; }
+    .content-section { page-break-inside: auto; }
+    """)
+
+    style_block = f"<style>\n{' '.join(inline_styles)}\n</style>"
+
+    # Remove external stylesheet link(s) and Google Fonts (network unavailable in Docker/no-internet)
+    import re
+    html_content = re.sub(
+        r'<link[^\u003e]*rel=["\']?stylesheet["\']?[^\u003e]*style\.css[^\u003e]*>',
+        '',
+        html_content,
+        flags=re.IGNORECASE,
+    )
+    html_content = re.sub(
+        r'<link[^\u003e]*fonts\.googleapis\.com[^\u003e]*>',
+        '',
+        html_content,
+        flags=re.IGNORECASE,
+    )
+
+    # Inject inlined styles before closing </head>
+    if "</head>" in html_content:
+        html_content = html_content.replace("</head>", style_block + "</head>")
+    else:
+        html_content = style_block + html_content
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        # Use domcontentloaded to avoid stalling on external resources
+        page.set_content(html_content, wait_until="domcontentloaded")
+        page.pdf(
+            path=str(output_path),
+            format="A4",
+            margin={"top": "15mm", "bottom": "15mm", "left": "15mm", "right": "15mm"},
+            print_background=True,
+        )
+        browser.close()
+    return None
 
 
 def render_csv(profile: dict, output_path: Path) -> None:
@@ -108,3 +165,37 @@ def list_templates(templates_dir: Path | None = None) -> list[str]:
         d.name for d in templates_dir.iterdir()
         if d.is_dir() and (d / 'template.html').exists()
     ])
+
+
+def validate_template_name(template_name: str, templates_dir: Path) -> None:
+    """Validate template name to prevent path traversal attacks.
+
+    Args:
+        template_name: Name of the template to validate.
+        templates_dir: Path to the templates directory.
+
+    Raises:
+        ValueError: If template_name is empty, contains invalid patterns,
+                    or resolves outside the templates directory.
+    """
+    if not template_name:
+        raise ValueError("template_name cannot be empty")
+
+    if '..' in template_name or template_name.startswith('/') or template_name.startswith('\\'):
+        raise ValueError(f"Invalid template name '{template_name}': path traversal not allowed")
+
+    if len(template_name) > 1 and template_name[1] == ':':
+        raise ValueError(f"Invalid template name '{template_name}': absolute paths not allowed")
+
+    available_templates = list_templates(templates_dir)
+    if template_name not in available_templates:
+        raise ValueError(
+            f"Template '{template_name}' not found. Available templates: {available_templates}"
+        )
+
+    template_path = (templates_dir / template_name / 'template.html').resolve()
+    resolved_templates_dir = templates_dir.resolve()
+    try:
+        template_path.relative_to(resolved_templates_dir)
+    except ValueError:
+        raise ValueError(f"Template path '{template_name}' resolves outside templates directory")

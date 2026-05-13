@@ -366,18 +366,34 @@ body {
 @media print {
     body {
         font-size: 9pt;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
     .cv-document {
         box-shadow: none;
+        max-width: none;
+        margin: 0;
     }
     .cv-header {
         padding: 25px 30px;
+        page-break-inside: avoid;
     }
     .cv-main {
         padding: 25px 30px;
     }
     .cv-sidebar {
         padding: 25px 20px;
+    }
+    .experience-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    .education-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    .content-section {
+        page-break-inside: auto;
     }
 }
 

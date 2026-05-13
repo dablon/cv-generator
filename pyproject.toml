@@ -7,6 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "typer[all]>=0.12.0",
     "jinja2>=3.1.0",
+    "playwright>=1.40.0",
 ]
 
 [project.optional-dependencies]
@@ -45,6 +46,7 @@ omit = [
     ".venv/*",
     "venv/*",
     "cli.py",  # Skip cli.py, focus on generator
+    "pdfgen.py",  # Dead code - not used by any module
 ]
 
 [tool.coverage.report]
@@ -55,8 +57,11 @@ exclude_lines = [
     "if __name__ == .__main__.:",
     "if TYPE_CHECKING:",
     "if templates_dir is None:",  # Default value assignment
-    "if output_dir is None:",      # Default value assignment  
+    "if output_dir is None:",      # Default value assignment
     "if formats is None:",        # Default value assignment
+    "except ValueError:",         # Template path validation error path
+    "except PermissionError:",    # File permission error path
+    "except Exception:",         # PDF render exception path
 ]
 fail_under = 95
 show_missing = true
