@@ -18,8 +18,10 @@
             </div>
             <div class="header-contact">
                 {% if profile.email %}<span>{{ profile.email }}</span>{% endif %}
+                {% if profile.phone %}<span>{{ profile.phone }}</span>{% endif %}
                 {% if profile.location %}<span>{{ profile.location }}</span>{% endif %}
                 {% if profile.linkedin %}<span>{{ profile.linkedin }}</span>{% endif %}
+                {% if profile.github %}<span>{{ profile.github }}</span>{% endif %}
             </div>
         </header>
         <main class="content">

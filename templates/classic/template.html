@@ -23,10 +23,15 @@
                     <div class="contact-line">
                         <span class="contact-item">{{ profile.email }}</span>
                         <span class="separator">·</span>
+                        {% if profile.phone %}<span class="contact-item">{{ profile.phone }}</span><span class="separator">·</span>{% endif %}
                         <span class="contact-item">{{ profile.location }}</span>
                     </div>
                     <div class="contact-line">
                         <span class="contact-item">{{ profile.linkedin }}</span>
+                        {% if profile.github %}
+                        <span class="separator">·</span>
+                        <span class="contact-item">{{ profile.github }}</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>

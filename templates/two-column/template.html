@@ -25,6 +25,12 @@
                     <span>{{ profile.email }}</span>
                 </div>
                 {% endif %}
+                {% if profile.phone %}
+                <div class="contact-row">
+                    <span class="dot">&#9632;</span>
+                    <span>{{ profile.phone }}</span>
+                </div>
+                {% endif %}
                 {% if profile.location %}
                 <div class="contact-row">
                     <span class="dot">&#9632;</span>
@@ -35,6 +41,12 @@
                 <div class="contact-row">
                     <span class="dot">&#9632;</span>
                     <span>{{ profile.linkedin }}</span>
+                </div>
+                {% endif %}
+                {% if profile.github %}
+                <div class="contact-row">
+                    <span class="dot">&#9632;</span>
+                    <span>{{ profile.github }}</span>
                 </div>
                 {% endif %}
             </div>

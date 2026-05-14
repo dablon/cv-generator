@@ -85,15 +85,20 @@ def render_pdf(profile: dict, template_name: str, templates_dir: Path, output_pa
         photo_file = Path(photo_path)
         if photo_file.exists():
             import base64
-            ext = photo_file.suffix.lower()
-            mime = (
-                "image/png" if ext == ".png"
-                else "image/jpeg" if ext in (".jpg", ".jpeg")
-                else "image/gif" if ext == ".gif"
-                else "image/png"
-            )
-            b64 = base64.b64encode(photo_file.read_bytes()).decode("ascii")
-            data_uri = f"data:{mime};base64,{b64}"
+            from io import BytesIO
+            from PIL import Image
+
+            # Resize/compress avatar to keep PDF under LinkedIn's 2 MB limit
+            img = Image.open(photo_file)
+            img = img.convert("RGB")
+            max_size = (120, 120)
+            img.thumbnail(max_size, Image.LANCZOS)
+            buf = BytesIO()
+            img.save(buf, format="JPEG", quality=75, optimize=True)
+            compressed_bytes = buf.getvalue()
+
+            b64 = base64.b64encode(compressed_bytes).decode("ascii")
+            data_uri = f"data:image/jpeg;base64,{b64}"
             # Replace the already-resolved path in the rendered HTML
             html_content = html_content.replace(f'src="{photo_path}"', f'src="{data_uri}"')
             html_content = html_content.replace(f"src='{photo_path}'", f'src="{data_uri}"')

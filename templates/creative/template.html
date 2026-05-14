@@ -30,7 +30,7 @@ td { vertical-align: top; padding: 8px; }
             {% endif %}
             <h1>{{ profile.title }}</h1>
             <p>{{ profile.subtitle }}</p>
-<p>{{ profile.email }} | {{ profile.location }} | {{ profile.linkedin }}</p>
+<p>{{ profile.email }}{% if profile.phone %} | {{ profile.phone }}{% endif %} | {{ profile.location }} | {{ profile.linkedin }}{% if profile.github %} | {{ profile.github }}{% endif %}</p>
 </td>
 </tr>
 <tr>
